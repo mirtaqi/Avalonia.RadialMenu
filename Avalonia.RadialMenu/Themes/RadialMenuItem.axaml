@@ -36,7 +36,7 @@
         <Setter Property="CenterY" Value="150" />
         <Setter Property="InnerRadius" Value="30" />
         <Setter Property="OuterRadius" Value="150" />
-        <Setter Property="Background" Value="#2D3250" />
+        <Setter Property="Background" Value="#AA2D3250" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="EdgeInnerRadius" Value="135" />
         <Setter Property="EdgeOuterRadius" Value="150" />
