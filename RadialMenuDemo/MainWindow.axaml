@@ -48,7 +48,9 @@
 
         <Canvas x:Name="canvas" Grid.Row="1" PointerPressed="Canvas_OnPointerPressed" Background="Transparent">
 
-            <radialMenu:RadialMenu HalfShiftedItems="{Binding IsShifted}" Canvas.Top="{Binding Location.Y}"
+            <radialMenu:RadialMenu 
+                LevelRadius="100"
+                HalfShiftedItems="{Binding IsShifted}" Canvas.Top="{Binding Location.Y}"
                                    Canvas.Left="{Binding Location.X}" x:Name="radialMenu" IsOpen="{Binding IsOpen}">
 
                 <radialMenu:RadialMenu.CentralItem>

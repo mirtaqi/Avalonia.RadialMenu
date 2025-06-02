@@ -139,7 +139,7 @@ public class RadialMenu : ContentControl
         for (int i = 0; i < count; i++)
         {
             menuItems[i].RadialMenu = this;
-            menuItems[i].IsVisible = menuItems[i].MenuLevel == 0 || menuItems[i].IsChildOf(SelectedItem);
+            menuItems[i].IsVisible = menuItems[i].MenuLevel == 0 || (SelectedItem is not null && menuItems[i].IsSelfOrChildOf(SelectedItem.GetSelfAndAncestors().ToArray()));
 
             menuItems[i].ParentMenuItem=parent;
             

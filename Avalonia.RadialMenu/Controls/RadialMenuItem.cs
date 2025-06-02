@@ -275,19 +275,23 @@ public class RadialMenuItem : Button
     }
     public RadialMenuItem? ParentMenuItem { get; internal set; }
 
-    public bool IsChildOf(RadialMenuItem? parent)
+    public bool IsSelfOrChildOf(RadialMenuItem[] parents)
     {
-        if (parent is null)
-            return false;
-        RadialMenuItem? current = ParentMenuItem;
-        while (true)
-        {
-            if (current is null)
-                return false;
-            if (current==parent)
-                return true;
-            current=current.ParentMenuItem;
-        }
+
+        return parents.Any(u => u == this || this.ParentMenuItem == u);
+        //if (parent is null)
+        //    return false;
+        //if(parent ==this)
+        //    return true;
+        //RadialMenuItem? current = ParentMenuItem;
+        //while (true)
+        //{
+        //    if (current is null)
+        //        return false;
+        //    if (current==parent)
+        //        return true;
+        //    current=current.ParentMenuItem;
+        //}
     }
     public RadialMenu? RadialMenu { get; internal set; }
    
@@ -325,4 +329,23 @@ public class RadialMenuItem : Button
         }
         base.ArrangeCore(finalRect);
     }
+
+    public IEnumerable<RadialMenuItem> GetSelfAndAncestors()
+    {
+        yield return this;
+        var p = this.ParentMenuItem;
+        while (true)
+        {
+            if (p is not null)
+            {
+                yield return p;
+                p = p.ParentMenuItem;
+            }
+            else
+            {
+                break;
+            }
+        }
+    }
+    
 }
