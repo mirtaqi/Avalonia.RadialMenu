@@ -49,7 +49,7 @@
         <Canvas x:Name="canvas" Grid.Row="1" PointerPressed="Canvas_OnPointerPressed" Background="Transparent">
 
             <radialMenu:RadialMenu 
-                LevelRadius="100"
+                LevelRadius="90"
                 HalfShiftedItems="{Binding IsShifted}" 
                 Canvas.Top="{Binding Location.Y}"
                                    Canvas.Left="{Binding Location.X}" 

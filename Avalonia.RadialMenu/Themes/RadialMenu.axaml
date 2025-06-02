@@ -3,7 +3,6 @@
         xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls">
 
 	<Style Selector="controls|RadialMenu">
-
 		<!-- RadialMenu template -->
 		<Setter Property="Template">
 			<Setter.Value>

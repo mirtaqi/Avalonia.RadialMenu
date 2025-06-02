@@ -38,11 +38,16 @@
         <Setter Property="CenterY" Value="150" />-->
 		<!--<Setter Property="InnerRadius" Value="30" />
         <Setter Property="OuterRadius" Value="150" />-->
-		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="#111" />
+		<Setter Property="Background" Value="#116699" />
+		<!--<Setter Property="Effect">
+			<Setter.Value>
+				<DropShadowEffect BlurRadius="1" OffsetX="2" OffsetY="2" Color="#223366"></DropShadowEffect>
+            </Setter.Value>
+        </Setter>-->
+		<Setter Property="Foreground" Value="#FFFFFF" />
 		<!--<Setter Property="EdgeInnerRadius" Value="135" />
         <Setter Property="EdgeOuterRadius" Value="150" />-->
-		<Setter Property="EdgeBackground" Value="#CCC" />
+		<Setter Property="EdgeBackground" Value="#332266" />
 		<Setter Property="EdgePadding" Value="2" />
 		<!--<Setter Property="ContentRadius" Value="82.5" />-->
 		<Setter Property="ArrowBackground" Value="#FFF" />

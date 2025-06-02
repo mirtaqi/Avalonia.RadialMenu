@@ -1,9 +1,10 @@
 <Application xmlns="https://github.com/avaloniaui"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:materialIcons="clr-namespace:Material.Icons.Avalonia;assembly=Material.Icons.Avalonia"
-             x:Class="RadialMenuDemo.App">
+             x:Class="RadialMenuDemo.App"
+             RequestedThemeVariant="Light">
     <Application.Styles>
-        <FluentTheme />
+        <FluentTheme  />
         <StyleInclude Source="avares://Avalonia.RadialMenu/Themes/Generic.axaml" />
         <materialIcons:MaterialIconStyles />
     </Application.Styles>
