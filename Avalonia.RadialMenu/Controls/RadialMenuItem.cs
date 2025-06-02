@@ -305,8 +305,17 @@ public class RadialMenuItem : Button
         var centerItem= radialMenu.FindDescendantOfType<RadialMenuCentralItem>();
         ArgumentNullException.ThrowIfNull(centerItem);
         var centerItemRadius = centerItem.Bounds.Width / 2d;
-        var angleDelta = 360.0 / Count;
+        var maxAngleCoverage = 360d;
+        if (ParentMenuItem is not null)
+        {
+            maxAngleCoverage = 200;
+        }
+        var angleDelta = maxAngleCoverage / Count;
         var angleShift = HalfShifted ? -angleDelta / 2 : 0;
+        if (ParentMenuItem is not null)
+        {
+            angleShift= ParentMenuItem.StartAngle - maxAngleCoverage / 2+angleDelta/2d;
+        }
         var startAngle = angleDelta * Index + angleShift;
         var rotation = startAngle + angleDelta / 2;
 

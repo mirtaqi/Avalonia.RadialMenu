@@ -78,6 +78,51 @@
                                         New Page10
                                     </TextBlock>
                                 </WrapPanel>
+								<radialMenu:RadialMenuItem.SubMenuItems>
+									<!--Level 2-->
+									<radialMenu:RadialMenuItem
+                               
+										Command="{Binding Pressed}" CommandParameter="5">
+										<WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+											<material:MaterialIcon Kind="FilePlus" />
+											<TextBlock FontSize="14" TextAlignment="Center">
+												New Page101
+											</TextBlock>
+										</WrapPanel>
+									</radialMenu:RadialMenuItem>
+
+									<radialMenu:RadialMenuItem
+                               
+										Command="{Binding Pressed}" CommandParameter="5">
+										<WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+											<material:MaterialIcon Kind="FilePlus" />
+											<TextBlock FontSize="14" TextAlignment="Center">
+												New Page201
+											</TextBlock>
+										</WrapPanel>
+									</radialMenu:RadialMenuItem>
+
+									<radialMenu:RadialMenuItem
+                               
+										Command="{Binding Pressed}" CommandParameter="5">
+										<WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+											<material:MaterialIcon Kind="FilePlus" />
+											<TextBlock FontSize="14" TextAlignment="Center">
+												New Page301
+											</TextBlock>
+										</WrapPanel>
+									</radialMenu:RadialMenuItem>
+									<radialMenu:RadialMenuItem
+                               
+										Command="{Binding Pressed}" CommandParameter="5">
+										<WrapPanel Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+											<material:MaterialIcon Kind="FilePlus" />
+											<TextBlock FontSize="14" TextAlignment="Center">
+												New Page401
+											</TextBlock>
+										</WrapPanel>
+									</radialMenu:RadialMenuItem>
+								</radialMenu:RadialMenuItem.SubMenuItems>
                             </radialMenu:RadialMenuItem>
 
                             <radialMenu:RadialMenuItem
