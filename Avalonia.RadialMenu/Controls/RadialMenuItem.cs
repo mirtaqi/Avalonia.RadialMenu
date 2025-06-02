@@ -1,8 +1,10 @@
+using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Data;
 using Avalonia.Media;
 using Avalonia.Styling;
+using Avalonia.VisualTree;
 
 namespace Avalonia.RadialMenu.Controls;
 
@@ -11,6 +13,19 @@ namespace Avalonia.RadialMenu.Controls;
 /// </summary>
 public class RadialMenuItem : Button
 {
+    public RadialMenuItem()
+    {
+        SubMenuItems=new ObservableCollection<RadialMenuItem>();
+    }
+
+    protected override void OnClick()
+    {
+        var radialMenu = RadialMenu; 
+        ArgumentNullException.ThrowIfNull(radialMenu);
+        radialMenu.SelectedItem = this;
+        base.OnClick();
+    }
+
     public static readonly StyledProperty<int> IndexProperty =
         AvaloniaProperty.Register<RadialMenuItem, int>(nameof(Index), 0, false, BindingMode.Default, null, null, false);
 
@@ -229,6 +244,23 @@ public class RadialMenuItem : Button
         set => SetValue(RotationProperty, value);
     }
 
+    //public static readonly StyledProperty<int> MenuLevelProperty =
+    //    AvaloniaProperty.Register<RadialMenuItem, int>(nameof(MenuLevel), 0);
+
+    //public int MenuLevel
+    //{
+    //    get => GetValue(MenuLevelProperty);
+    //    set => SetValue(MenuLevelProperty, value);
+    //}
+    public static readonly StyledProperty<ObservableCollection<RadialMenuItem>> SubMenuItemsProperty =
+        AvaloniaProperty.Register<RadialMenuItem, ObservableCollection<RadialMenuItem>>(nameof(SubMenuItems),
+            null);
+
+    public ObservableCollection<RadialMenuItem> SubMenuItems
+    {
+        get => GetValue(SubMenuItemsProperty);
+        set => SetValue(SubMenuItemsProperty, value);
+    }
     static RadialMenuItem()
     {
         AffectsArrange<RadialMenuItem>(IndexProperty);
@@ -236,8 +268,39 @@ public class RadialMenuItem : Button
         AffectsArrange<RadialMenuItem>(HalfShiftedProperty);
     }
 
+    public int MenuLevel
+    {
+        get;
+        internal set;
+    }
+    public RadialMenuItem? ParentMenuItem { get; internal set; }
+
+    public bool IsChildOf(RadialMenuItem? parent)
+    {
+        if (parent is null)
+            return false;
+        RadialMenuItem? current = ParentMenuItem;
+        while (true)
+        {
+            if (current is null)
+                return false;
+            if (current==parent)
+                return true;
+            current=current.ParentMenuItem;
+        }
+    }
+    public RadialMenu? RadialMenu { get; internal set; }
+   
     protected override void ArrangeCore(Rect finalRect)
     {
+        var radialMenu = RadialMenu;
+
+        if(radialMenu is null)
+            return;
+        //ArgumentNullException.ThrowIfNull(radialMenu);
+        var centerItem= radialMenu.FindDescendantOfType<RadialMenuCentralItem>();
+        ArgumentNullException.ThrowIfNull(centerItem);
+        var centerItemRadius = centerItem.Bounds.Width / 2d;
         var angleDelta = 360.0 / Count;
         var angleShift = HalfShifted ? -angleDelta / 2 : 0;
         var startAngle = angleDelta * Index + angleShift;
@@ -246,7 +309,20 @@ public class RadialMenuItem : Button
         AngleDelta = angleDelta;
         StartAngle = startAngle;
         Rotation = rotation;
-
+        InnerRadius = centerItemRadius + radialMenu.LevelRadius * MenuLevel;
+        OuterRadius = InnerRadius + radialMenu.LevelRadius;
+        EdgeInnerRadius = OuterRadius - 15;
+        EdgeOuterRadius = OuterRadius;
+        CenterX = radialMenu.Bounds.Width / 2d;
+        CenterY = radialMenu.Bounds.Height / 2d;
+        Width=radialMenu.Bounds.Width;
+        Height=radialMenu.Bounds.Height;
+        ContentRadius = (InnerRadius + EdgeInnerRadius) / 2d;
+        ArrowRadius = (EdgeInnerRadius + EdgeOuterRadius) / 2d;
+        foreach (var radialMenuItem in this.SubMenuItems)
+        {
+            radialMenuItem.ArrangeCore(finalRect);
+        }
         base.ArrangeCore(finalRect);
     }
 }

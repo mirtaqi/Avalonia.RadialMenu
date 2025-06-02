@@ -4,7 +4,7 @@ using Avalonia.Platform;
 
 namespace Avalonia.RadialMenu.Controls;
 
-internal class PieShape : Shape
+public class PieShape : Shape
 {
     public static readonly StyledProperty<double> InnerRadiusProperty =
         AvaloniaProperty.Register<PieShape, double>(nameof(InnerRadius));

@@ -1,0 +1,29 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls;assembly=Avalonia.RadialMenu"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="RadialMenuDemo.TestWindow"
+        Title="TestWindow">
+	<controls:PieShape  CenterX="400" CenterY="400"
+                       AngleDelta="30"
+                       InnerRadius="100"
+                       OuterRadius="200"
+                       StartAngle="30"
+                       
+                       >
+        <controls:PieShape.Fill>
+            <RadialGradientBrush Center="400,400"
+                                 >
+                <RadialGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="Red"></GradientStop>
+                    <GradientStop Offset="0.2" Color="DarkBlue"></GradientStop>
+                    <GradientStop Offset="0.6" Color="Cyan"></GradientStop>
+                    <GradientStop Offset="1" Color="Purple"></GradientStop>
+                </RadialGradientBrush.GradientStops>
+            </RadialGradientBrush>
+        </controls:PieShape.Fill>
+
+    </controls:PieShape>
+</Window>
