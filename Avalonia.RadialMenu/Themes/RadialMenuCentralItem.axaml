@@ -25,8 +25,8 @@
 
 
         <!-- Default RadialMenuCentralItem style -->
-        <Setter Property="Width" Value="60" />
-        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="Height" Value="40" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
@@ -40,6 +40,7 @@
             <Setter.Value>
 
                 <ControlTemplate TargetType="controls:RadialMenuCentralItem">
+                    
                     <Grid>
 
                         <!-- Rounded button -->
@@ -49,10 +50,12 @@
                             Fill="{TemplateBinding Background}" />
 
                         <!-- Content -->
+                        <Viewbox >
                         <ContentPresenter
                             Content="{TemplateBinding Content}"
                             HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                             VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                        </Viewbox>
 
                     </Grid>
                 </ControlTemplate>

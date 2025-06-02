@@ -27,7 +27,7 @@ public partial class MainWindow : ReactiveWindow<MainViewModel>
     {
         if (radialMenu.MenuContent is null || radialMenu.MenuContent.Count == 0)
             throw new Exception("Invalid: RadialMenu has 0 Items, Add Items to RadialMenu then try again");
-
+            
         var rad = radialMenu.MenuContent[0].OuterRadius;
         return new Point(p.X - rad, p.Y - rad);
     }
@@ -39,7 +39,7 @@ public partial class MainWindow : ReactiveWindow<MainViewModel>
 
         if (curPoint.Properties.IsRightButtonPressed && !_mvm.IsOpen)
         {
-            _mvm.Location = GetCenterOfRadialMenu(curPoint.Position);
+            _mvm.Location = curPoint.Position;// GetCenterOfRadialMenu(curPoint.Position);
             _mvm.IsOpen = true;
         }
         else if (e.GetCurrentPoint(canvas).Properties.IsLeftButtonPressed && _mvm.IsOpen)

@@ -2,78 +2,80 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:controls="clr-namespace:Avalonia.RadialMenu.Controls">
 
-    <Style Selector="controls|RadialMenu">
+	<Style Selector="controls|RadialMenu">
 
-        <!-- RadialMenu template -->
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="controls:RadialMenu">
-                    <Grid>
+		<!-- RadialMenu template -->
+		<Setter Property="Template">
+			<Setter.Value>
+				<ControlTemplate TargetType="controls:RadialMenu">
 
-                        <!-- RadialMenu background -->
-                        <Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}"
+					<Grid >
+
+						<!-- RadialMenu background -->
+						<Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}"
                                  Height="{TemplateBinding Height}" />
 
-                        <!-- Content repetition (for items around) -->
-                        <ItemsControl
+						<!-- Content repetition (for items around) -->
+						<ItemsControl
                             ItemsSource="{Binding MenuContent, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}">
-                            <ItemsControl.ItemsPanel>
-                                <ItemsPanelTemplate>
-                                    <Grid />
-                                </ItemsPanelTemplate>
-                            </ItemsControl.ItemsPanel>
-                        </ItemsControl>
+							<ItemsControl.ItemsPanel>
+								<ItemsPanelTemplate>
+									<Grid />
+								</ItemsPanelTemplate>
+							</ItemsControl.ItemsPanel>
+						</ItemsControl>
 
-                        <!-- Content (for central item) -->
-                        <ContentPresenter Content="{TemplateBinding CentralItem}" />
+						<!-- Content (for central item) -->
+						<ContentPresenter Content="{TemplateBinding CentralItem}" />
 
-                    </Grid>
-                </ControlTemplate>
+					</Grid>
 
-            </Setter.Value>
-        </Setter>
+				</ControlTemplate>
 
-    </Style>
+			</Setter.Value>
+		</Setter>
 
-    <Style Selector="controls|RadialMenu[IsOpen=true]">
-        <Setter Property="IsVisible" Value="True" />
-        <Setter Property="Opacity" Value="1.0" />
-        <Style.Animations>
-            <Animation Duration="0:0:0.2">
-                <KeyFrame Cue="0%">
-                    <Setter Property="Opacity" Value="0.0" />
-                    <Setter Property="RotateTransform.Angle" Value="-50" />
-                    <Setter Property="ScaleTransform.ScaleX" Value="0.5" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="0.5" />
-                </KeyFrame>
-                <KeyFrame Cue="100%">
-                    <Setter Property="Opacity" Value="1.0" />
-                    <Setter Property="RotateTransform.Angle" Value="0.0" />
-                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
-                </KeyFrame>
-            </Animation>
-        </Style.Animations>
-    </Style>
+	</Style>
 
-    <Style Selector="controls|RadialMenu[IsOpen=false]">
-        <Setter Property="Opacity" Value="0.0" />
-        <Style.Animations>
-            <Animation Duration="0:0:0.2">
-                <KeyFrame Cue="0%">
-                    <Setter Property="Opacity" Value="1.0" />
-                    <Setter Property="RotateTransform.Angle" Value="0" />
-                    <Setter Property="ScaleTransform.ScaleX" Value="1" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="1" />
-                </KeyFrame>
-                <KeyFrame Cue="100%">
-                    <Setter Property="Opacity" Value="0.0" />
-                    <Setter Property="RotateTransform.Angle" Value="-50.0" />
-                    <Setter Property="ScaleTransform.ScaleX" Value="0.5" />
-                    <Setter Property="ScaleTransform.ScaleY" Value="0.5" />
-                    <Setter Property="IsVisible" Value="False" />
-                </KeyFrame>
-            </Animation>
-        </Style.Animations>
-    </Style>
+	<Style Selector="controls|RadialMenu[IsOpen=true]">
+		<Setter Property="IsVisible" Value="True" />
+		<Setter Property="Opacity" Value="1.0" />
+		<Style.Animations>
+			<Animation Duration="0:0:0.2">
+				<KeyFrame Cue="0%">
+					<Setter Property="Opacity" Value="0.0" />
+					<Setter Property="RotateTransform.Angle" Value="-50" />
+					<Setter Property="ScaleTransform.ScaleX" Value="0.5" />
+					<Setter Property="ScaleTransform.ScaleY" Value="0.5" />
+				</KeyFrame>
+				<KeyFrame Cue="100%">
+					<Setter Property="Opacity" Value="1.0" />
+					<Setter Property="RotateTransform.Angle" Value="0.0" />
+					<Setter Property="ScaleTransform.ScaleX" Value="1" />
+					<Setter Property="ScaleTransform.ScaleY" Value="1" />
+				</KeyFrame>
+			</Animation>
+		</Style.Animations>
+	</Style>
+
+	<Style Selector="controls|RadialMenu[IsOpen=false]">
+		<Setter Property="Opacity" Value="0.0" />
+		<Style.Animations>
+			<Animation Duration="0:0:0.2">
+				<KeyFrame Cue="0%">
+					<Setter Property="Opacity" Value="1.0" />
+					<Setter Property="RotateTransform.Angle" Value="0" />
+					<Setter Property="ScaleTransform.ScaleX" Value="1" />
+					<Setter Property="ScaleTransform.ScaleY" Value="1" />
+				</KeyFrame>
+				<KeyFrame Cue="100%">
+					<Setter Property="Opacity" Value="0.0" />
+					<Setter Property="RotateTransform.Angle" Value="-50.0" />
+					<Setter Property="ScaleTransform.ScaleX" Value="0.5" />
+					<Setter Property="ScaleTransform.ScaleY" Value="0.5" />
+					<Setter Property="IsVisible" Value="False" />
+				</KeyFrame>
+			</Animation>
+		</Style.Animations>
+	</Style>
 </Styles>
