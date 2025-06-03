@@ -29,8 +29,8 @@
         <Setter Property="Height" Value="40" />
         <Setter Property="HorizontalAlignment" Value="Center" />
         <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="Foreground" Value="#111" />
+        <Setter Property="Background" Value="#116699" />
+        <Setter Property="Foreground" Value="#CCC" />
         <Setter Property="BorderBrush" Value="#CCC" />
         <Setter Property="BorderThickness" Value="2" />
         <Setter Property="ZIndex" Value="0" />

@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Diagnostics;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -194,6 +195,7 @@ public class RadialMenu : ContentControl
 
     protected override void ArrangeCore(Rect finalRect)
     {
+        Debug.WriteLine("Radial menu arrange core");
         //var levels = MenuContent.Select(m => m.MenuLevel).Distinct().ToArray();
         //var levelCount = levels.Length;
         //foreach (var level in levels)
@@ -239,7 +241,7 @@ public class RadialMenu : ContentControl
             menuItems[i].Count = count;
             menuItems[i].HalfShifted = HalfShiftedItems;
             ArrangeMenuItems(menuItems[i], menuItems[i].SubMenuItems, level + 1);
-            menuItems[i].InvalidateArrange();
+            //menuItems[i].InvalidateArrange();
         }
     }
 

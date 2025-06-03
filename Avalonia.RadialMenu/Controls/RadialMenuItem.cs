@@ -308,7 +308,7 @@ public class RadialMenuItem : Button
         var maxAngleCoverage = 360d;
         if (ParentMenuItem is not null)
         {
-            maxAngleCoverage = 200;
+            maxAngleCoverage = 120;
         }
         var angleDelta = maxAngleCoverage / Count;
         var angleShift = HalfShifted ? -angleDelta / 2 : 0;
@@ -332,10 +332,10 @@ public class RadialMenuItem : Button
         Height=radialMenu.Bounds.Height;
         ContentRadius = (InnerRadius + EdgeInnerRadius) / 2d;
         ArrowRadius = (EdgeInnerRadius + EdgeOuterRadius) / 2d;
-        foreach (var radialMenuItem in this.SubMenuItems)
-        {
-            radialMenuItem.ArrangeCore(finalRect);
-        }
+        //foreach (var radialMenuItem in this.SubMenuItems)
+        //{
+        //    radialMenuItem.ArrangeCore(finalRect);
+        //}
         base.ArrangeCore(finalRect);
     }
 
