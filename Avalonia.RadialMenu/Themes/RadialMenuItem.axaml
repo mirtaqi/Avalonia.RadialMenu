@@ -38,6 +38,8 @@
         <Setter Property="CenterY" Value="150" />-->
 		<!--<Setter Property="InnerRadius" Value="30" />
         <Setter Property="OuterRadius" Value="150" />-->
+		<Setter Property="VerticalAlignment" Value="Stretch"></Setter>
+		<Setter Property="HorizontalAlignment" Value="Stretch"></Setter>
 		<Setter Property="Background" Value="#116699" />
 		<!--<Setter Property="Effect">
 			<Setter.Value>
@@ -60,9 +62,8 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="controls:RadialMenuItem">
-					<Grid>
-						<Canvas ZIndex="{TemplateBinding Panel.ZIndex}" Width="{TemplateBinding Width}"
-								Height="{TemplateBinding Height}">
+					<Grid  VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+						<Canvas ZIndex="{TemplateBinding Panel.ZIndex}" VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
 							<!-- Main pie piece -->
 							<controls:PieShape
 								CenterX="{TemplateBinding CenterX}"
@@ -169,7 +170,7 @@
                             ItemsSource="{TemplateBinding SubMenuItems}">
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
-									<Grid />
+									<Grid VerticalAlignment="Stretch" HorizontalAlignment="Stretch" />
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
 						</ItemsControl>

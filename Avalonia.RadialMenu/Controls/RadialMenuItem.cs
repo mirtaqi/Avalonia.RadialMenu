@@ -294,7 +294,6 @@ public class RadialMenuItem : Button
         //}
     }
     public RadialMenu? RadialMenu { get; internal set; }
-   
     protected override void ArrangeCore(Rect finalRect)
     {
         var radialMenu = RadialMenu;

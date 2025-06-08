@@ -36,6 +36,7 @@ public class RadialMenu : ContentControl
             }
             _disableCanvasObserver = false;
         }
+        
     }
 
     public RadialMenu()
@@ -214,6 +215,7 @@ public class RadialMenu : ContentControl
         return new Size(size * 2, size * 2);
     }
 
+
     public double CalculateLevel1Radius()
     {
         var centerMenuRadius = 30d;
@@ -229,7 +231,7 @@ public class RadialMenu : ContentControl
         base.OnLoaded(e);
 
     }
-
+    
     protected override void ArrangeCore(Rect finalRect)
     {
         Debug.WriteLine("Radial menu arrange core");

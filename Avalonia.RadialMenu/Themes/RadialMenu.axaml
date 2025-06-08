@@ -12,21 +12,25 @@
                           HorizontalAlignment="Stretch">
 
 						<!-- RadialMenu background -->
-						<Ellipse Fill="{TemplateBinding Background}" Width="{TemplateBinding Width}"
-                                 Height="{TemplateBinding Height}" />
+						<Ellipse Fill="{TemplateBinding Background}" VerticalAlignment="Stretch"
+                                 HorizontalAlignment="Stretch"/>
 
 						<!-- Content repetition (for items around) -->
 						<ItemsControl
                             ItemsSource="{Binding MenuContent, RelativeSource={RelativeSource TemplatedParent}, UpdateSourceTrigger=PropertyChanged}">
 							<ItemsControl.ItemsPanel>
 								<ItemsPanelTemplate>
-									<Grid />
+									<Grid VerticalAlignment="Stretch"
+                                          HorizontalAlignment="Stretch"/>
 								</ItemsPanelTemplate>
 							</ItemsControl.ItemsPanel>
 						</ItemsControl>
 
 						<!-- Content (for central item) -->
 						<ContentPresenter Content="{TemplateBinding CentralItem}" />
+						<!--<Border BorderBrush="Red" BorderThickness="1"
+                                VerticalAlignment="Stretch"
+                                HorizontalAlignment="Stretch"></Border>-->
 
 					</Grid>
 
