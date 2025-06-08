@@ -13,43 +13,26 @@ public class RadialMenu : ContentControl
 {
     private readonly AnonymousObserver<AvaloniaPropertyChangedEventArgs<double>> _canvasLeftTopObserver;
     private bool _disableCanvasObserver = false;
+    private bool _isCanvasPositionChanged = true;
     private void OnCanvasLeftTopChanged(AvaloniaPropertyChangedEventArgs<double> obj)
     {
+
         if (_disableCanvasObserver) return;
+      
+      
+        _isCanvasPositionChanged = true;
+        
         if (obj.Sender == this)
         {
-            _disableCanvasObserver = true;
+        
             if (obj.Property == Canvas.LeftProperty)
             {
-                if (this.IsSet(Canvas.LeftProperty) && this.IsLoaded)
-                {
-                    var level1Radius = this.Bounds.Width / 2d;
-                    //level1Radius = level1Radius / Math.Sqrt(2);
-                    //level1Radius -= 25;
-                    //var d = Math.Sqrt(2 * level1Radius * level1Radius);
-                    //level1Radius = d;
-                    var left = (double)this.GetValue(Canvas.LeftProperty);
-                    left -= level1Radius;
-
-                    this.SetValue(Canvas.LeftProperty, left);
-
-                }
+                AlignCenterX();
 
             }
             else if (obj.Property == Canvas.TopProperty)
             {
-                if (this.IsSet(Canvas.LeftProperty) && this.IsLoaded)
-                {
-                    var level1Radius = this.Bounds.Width / 2d;
-                    //level1Radius = level1Radius / Math.Sqrt(2);
-                    //level1Radius -= 25;
-                    //var d = Math.Sqrt(2 * level1Radius * level1Radius);
-                    //level1Radius = d;
-
-                    var top = (double)this.GetValue(Canvas.TopProperty);
-                    top -= level1Radius;
-                    this.SetValue(Canvas.TopProperty, top);
-                }
+                AlignCenterY();
             }
             _disableCanvasObserver = false;
         }
@@ -68,24 +51,70 @@ public class RadialMenu : ContentControl
             {
                 SelectedItem = null;
             }
-            //else
-            //{
-            //    if (this.IsSet(Canvas.LeftProperty) && this.IsLoaded)
-            //    {
-            //        var level1Radius = this.Bounds.Width / 2d;
-            //        level1Radius =  level1Radius/ Math.Sqrt(2);
-            //        level1Radius -= 25;
-            //        //var d = Math.Sqrt(2 * level1Radius * level1Radius);
-            //        //level1Radius = d;
-            //        var left = (double)this.GetValue(Canvas.LeftProperty);
-            //        left -= level1Radius;
-            //        this.SetValue(Canvas.LeftProperty, left);
-            //        var top = (double)this.GetValue(Canvas.TopProperty);
-            //        top -= level1Radius;
-            //        this.SetValue(Canvas.TopProperty, top);
-            //    }
-            //}
+            else
+            {
+              AlignCenterToCanvasPosition();
+            }
         }));
+    }
+
+    protected override void OnSizeChanged(SizeChangedEventArgs e)
+    {
+        base.OnSizeChanged(e);
+        AlignCenterToCanvasPosition();
+    }
+
+    private double _lastCanvasX=0, _lastCanvasY=0;
+    private void AlignCenterToCanvasPosition()
+    {
+        AlignCenterX();
+        AlignCenterY();
+    }
+
+    private void AlignCenterX()
+    {
+        if (this.IsSet(Canvas.LeftProperty) && this.IsLoaded && _isCanvasPositionChanged && this.Bounds.Width > 0 && this.Bounds.Height > 0)
+        {
+            _disableCanvasObserver = true;
+
+            var left = (double)this.GetValue(Canvas.LeftProperty);
+
+            if (Math.Abs(_lastCanvasX - left) < 1 )
+                return;
+            var level1Radius = this.Bounds.Width / 2d;
+
+            left -= level1Radius;
+
+            this.SetValue(Canvas.LeftProperty, left);
+            _lastCanvasX = left;
+            
+
+
+            _isCanvasPositionChanged = false;
+            _disableCanvasObserver = false;
+        }
+    }
+    private void AlignCenterY()
+    {
+        if (this.IsSet(Canvas.TopProperty) && this.IsLoaded && _isCanvasPositionChanged && this.Bounds.Width > 0 && this.Bounds.Height > 0)
+        {
+            _disableCanvasObserver = true;
+
+            var top = (double)this.GetValue(Canvas.TopProperty);
+
+            if (Math.Abs(_lastCanvasY - top) < 1)
+                return;
+            var level1Radius = this.Bounds.Width / 2d;
+
+             
+            top -= level1Radius;
+            this.SetValue(Canvas.TopProperty, top);
+            _lastCanvasY = top;
+
+
+            _isCanvasPositionChanged = false;
+            _disableCanvasObserver = false;
+        }
     }
     public static readonly StyledProperty<bool> IsOpenProperty =
         AvaloniaProperty.Register<RadialMenu, bool>(nameof(IsOpen), false);
@@ -163,6 +192,8 @@ public class RadialMenu : ContentControl
 
         return menuItems.Select(u => GetMaxLevel(u.SubMenuItems, level + 1)).Max();
     }
+
+    private int _lastMaxLevel = -1;
     protected override Size MeasureOverride(Size availableSize)
     {
         //return base.MeasureOverride(availableSize);
@@ -172,8 +203,14 @@ public class RadialMenu : ContentControl
             centerMenuRadius = CentralItem.Bounds.Width / 2;
         }
         var maxLevel = GetMaxLevel(MenuContent, 0);
+        
         var size = centerMenuRadius + LevelRadius * maxLevel;
 
+        if (_lastMaxLevel != maxLevel)
+        {
+            this.InvalidateMeasure();
+        }
+        _lastMaxLevel= maxLevel;
         return new Size(size * 2, size * 2);
     }
 

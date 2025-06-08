@@ -314,7 +314,8 @@ public class RadialMenuItem : Button
         var angleShift = HalfShifted ? -angleDelta / 2 : 0;
         if (ParentMenuItem is not null)
         {
-            angleShift= ParentMenuItem.StartAngle - maxAngleCoverage / 2+angleDelta/2d;
+
+            angleShift = ParentMenuItem.StartAngle + ParentMenuItem.AngleDelta / 2 - maxAngleCoverage / 2;//+angleDelta/2d;
         }
         var startAngle = angleDelta * Index + angleShift;
         var rotation = startAngle + angleDelta / 2;
